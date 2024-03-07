@@ -55,7 +55,7 @@ def serve():
     recommendations_pb2_grpc.add_RecommendationsServicer_to_server(
         RecommendationService(), server
     )
-
+    """
     with open("server.key", "rb") as fp:
         server_key = fp.read()
     with open("server.pem", "rb") as fp:
@@ -68,7 +68,8 @@ def serve():
         root_certificates=ca_cert,
         require_client_auth=True,
     )
-    server.add_secure_port("[::]:443", creds)
+    """
+    server.add_insecure_port("[::]:50051")
     server.start()
     server.wait_for_termination()
 
